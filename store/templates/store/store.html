@@ -4,10 +4,53 @@
 {% load static %}
 {% block content %}
 
-<div class="container store">
+<div class="container ">
 
-	<div class="row">
-	<p>TEST for Store</p>
+    <div class="row">
+		<div class="col-lg-4">
+			<div class="card" style="width: 18rem;">
+                <img src="{% static 'media/placeholder.png' %}" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <button class="btn btn-outline-success">
+                      Add to Cart
+                  </button>
+                  <a class="btn btn-outline-success" href="">View</a>
+                  <h4><strong>£{{product.price|floatformat:2}}</strong></h4>
+                </div>
+              </div>
+		</div>
+
+		<div class="col-lg-4">
+			<div class="card" style="width: 18rem;">
+                <img src="{% static 'media/placeholder.png' %}" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <button class="btn btn-outline-success">
+                      Add to Cart
+                  </button>
+                  <a class="btn btn-outline-success" href="">View</a>
+                  <h4><strong>£{{product.price|floatformat:2}}</strong></h4>
+                </div>
+              </div>
+		</div>
+
+		<div class="col-lg-4">
+			<div class="card" style="width: 18rem;">
+                <img src="{% static 'media/placeholder.png' %}" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <button class="btn btn-outline-success">
+                      Add to Cart
+                  </button>
+                  <a class="btn btn-outline-success" href="">View</a>
+                  <h4><strong>£{{product.price|floatformat:2}}</strong></h4>
+                </div>
+              </div>
+		</div>
 	</div>
 </div>
 

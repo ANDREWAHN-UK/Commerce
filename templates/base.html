@@ -12,7 +12,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   
+
     {% endblock %}
 
     <!-- below block for extra meta tags if needed in the future -->
@@ -34,8 +34,8 @@
     {% endblock %}
 
     <!-- below block for core js tags, i.e. bootstrap, jquery, fontawesome, own script -->
-    {% block corejs %} 
-     <!-- Stripe -->
+    {% block corejs %}
+    <!-- Stripe -->
     <script src="https://js.stripe.com/v3/"></script>
     <script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
     <script src="{% static 'scripts/stripe_elements.js' %}" defer></script>
@@ -48,7 +48,7 @@
     </script>
     <!-- own script -->
     <script type="text/javascript" src=""></script>
-  
+
     {% endblock %}
 
     <!-- below block for extra js if needed in the future -->
@@ -59,32 +59,37 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-dark navbar-expand-lg ">
+
+    <!-- navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <!-- place container inside navbar so navbar fills the page -->
         <div class="container-fluid">
-            <a class="navbar-brand" href="">
-                <img src="" alt="" width="30" height="24">
+            
+
+            <!-- navbar icon -->
+            <a class="navbar-brand" href="{% url 'home' %}">
+                <img src="{% static 'media/burger-icon.png' %}" alt="" width="30" height="24"><i
+                    class="fa-thin fa-cart-circle-exclamation"></i>
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+
+            <!-- collapse button -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul class="navbar-nav">
+
+            <!-- collapsible content -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                <!-- links -->
+                <ul class="navbar-nav mr-auto">
 
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="">Home</a>
+                        <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="">Burger Menu</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="">Gallery</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="">Contact Us</a>
+                        <a class="nav-link active" aria-current="page" href="{% url 'store' %}">Burger Menu</a>
                     </li>
 
                     <li class="nav-item dropdown">
@@ -103,19 +108,18 @@
 
                 </ul>
 
+                <!-- cart button and total -->
                 <div class="form-inline my-2 my-lg-0">
 
                     <a href="{% url 'cart' %}">
-                        <img id="cart-icon" src="">
+                        <img id="cart-icon" src="{% static 'media/cart.png' %}">
                     </a>
-                    <p id="cart-total"></p>
+                    <p id="cart-total">{{cartItems}}</p>
 
                 </div>
-
-                </ul>
             </div>
-        </div>
     </nav>
+    </div>
 </body>
 
 <!-- page header -->
@@ -131,7 +135,7 @@
     <div class="container-fluid">
         <li class="nav-item">
             <a class="navbar-brand" href="{% url 'home' %}">
-                <img src="{% static 'images/burger-icon.png' %}" alt="" width="30" height="24">
+                <img src="{% static 'media/burger-icon.png' %}" alt="" width="30" height="24">
             </a>
         </li>
         <li><a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook-square"></i></a></li>

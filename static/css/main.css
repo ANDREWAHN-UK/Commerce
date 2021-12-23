@@ -1,3 +1,90 @@
-body{
-    background-color:blue;
+
+/* ====================================================={general stuff}===================================================== */
+* {
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Lato', sans-serif;
+    overflow-x: hidden;
+    margin: 0;
+  }
+  
+  body,
+  html {
+    height: 100%;
+  }
+
+  /* ====================================================={navbar}===================================================== */
+
+/* sets header and footer background colour */
+.navbar, .bottom-navbar{
+  background-color: black;
 }
+  
+  /* sets header and footer navlink colour, i.e .the text */
+  .nav-link{
+    color: #fff;
+  }
+  /* this is on the navbar */
+  #cart-icon {
+  width:25px;
+	display: inline-block;
+	margin-left: 15px;
+  position: absolute;
+  right: 50px;
+  bottom: 30px;
+  }
+  
+  /*pushes the logo from the left*/
+  .navbar-brand {
+    margin-left: 150px;  
+  }
+
+  .navbar-brand img{
+    color: #fff;
+  }
+  /* creates space between navbar items */
+  .nav-item {
+    margin-right: 1rem;
+  }
+  
+  /* use this for user profile stuff */
+  #navbarDropdownMenuLink-two {
+    background-color: yellow;
+    border-radius: 25px;
+    position: relative;
+    color: black;
+  }
+  
+  /* this is on the navbar */
+  #cart-total {    
+	display: block;
+	text-align: center;
+	color:#fff;
+	background-color: red;
+	width: 20px;
+	height: 25px;
+	border-radius: 50%;
+	font-size: 14px;  
+  position: absolute;
+  right: 50px;
+  bottom: -15px;
+  }
+  
+  /* ====================================================={store/menu page}===================================================== */
+
+
+
+
+.col-lg-4,
+.col-lg-6,
+.col-lg-8,
+.col-lg-12 {
+  margin-top: 10px;
+}
+
+.btn {
+  border-radius: 0;
+}
+
