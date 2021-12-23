@@ -1,5 +1,6 @@
 from django.db import models
-from django.contrib.auth.models import User #this is so a 1-to-1 user model can be built, i.e. each user=customer
+#  this is so a 1-to-1 user model can be built, i.e. each user=customer
+from django.contrib.auth.models import User  
 
 # Create your models here.
 
