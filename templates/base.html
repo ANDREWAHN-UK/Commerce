@@ -1,0 +1,148 @@
+<!-- this is inherited by the other pages, purpose here is to hold the navbar and load the css etc -->
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- below block for core meta tags -->
+    {% block meta %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+    {% endblock %}
+
+    <!-- below block for extra meta tags if needed in the future -->
+    {% block extra_meta %}
+    {% endblock %}
+
+    <!-- below block for core css stuff, i.e. bootstrap, googlefonts, own css, font awesome -->
+    {% block corecss %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato&display=swap">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+        integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    {% endblock %}
+
+    <!-- below block for extra css if needed in the future -->
+    {% block extra_css %}
+    {% endblock %}
+
+    <!-- below block for core js tags, i.e. bootstrap, jquery, fontawesome, own script -->
+    {% block corejs %} 
+     <!-- Stripe -->
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
+    <script src="{% static 'scripts/stripe_elements.js' %}" defer></script>
+    <!-- other stuff -->
+    <script src="https://kit.fontawesome.com/72d81e3495.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+    </script>
+    <!-- own script -->
+    <script type="text/javascript" src="{% static 'scripts/cart.js' %}"></script>
+  
+    {% endblock %}
+
+    <!-- below block for extra js if needed in the future -->
+    {% block extra_js %}
+    {% endblock %}
+
+    <title>Best Burger</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-dark navbar-expand-lg ">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="">
+                <img src="" alt="" width="30" height="24">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="">Home</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="">Burger Menu</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="">Gallery</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="">Contact Us</a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink-two" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Profile
+                        </a>
+                        <ul class="dropdown-menu" id="dropdown-menu-two" aria-labelledby="navbarDropdownMenuLink-two">
+                            <li><a class="dropdown-item" href="">Log In</a></li>
+                            <li><a class="dropdown-item" href="">Register</a></li>
+                            <li><a class="dropdown-item" href="">Log Out</a></li>
+                            <li><a class="dropdown-item" href="">Review a Burger</a></li>
+                            <li><a class="dropdown-item" href="">Manage Profile</a></li>
+                        </ul>
+                    </li>
+
+                </ul>
+
+                <div class="form-inline my-2 my-lg-0">
+
+                    <a href="{% url 'cart' %}">
+                        <img id="cart-icon" src="">
+                    </a>
+                    <p id="cart-total"></p>
+
+                </div>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+</body>
+
+<!-- page header -->
+{% block page_header %}
+{% endblock %}
+
+<!-- page content goes here -->
+{% block content %}
+{% endblock %}
+
+<!-- footer -->
+<nav class="navbar bottom-navbar fixed-bottom ">
+    <div class="container-fluid">
+        <li class="nav-item">
+            <a class="navbar-brand" href="{% url 'home' %}">
+                <img src="{% static 'images/burger-icon.png' %}" alt="" width="30" height="24">
+            </a>
+        </li>
+        <li><a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook-square"></i></a></li>
+        <li><a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a></li>
+        <li><a href="https://twitter.com/?lang=en-gb" target="_blank"><i class="fab fa-twitter-square"></i></a></li>
+        <li><a href="https://www.youtube.com" target="_blank"><i class="fab fa-youtube-square"></i></a></li>
+        <li><a href="https://www.linkedin.com/" target="_blank"><i class="fab fa-linkedin"></i></a></li>
+
+    </div>
+</nav>
+
+
+
+</html>
