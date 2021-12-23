@@ -42,6 +42,10 @@ INSTALLED_APPS = [
     'cart',
     'checkout',
     'home',
+    'django.contrib.sites',  #allauth
+    'allauth',  #allauth
+    'allauth.account',  #allauth
+    'allauth.socialaccount',  #allauth
     
 ]
 
@@ -73,7 +77,28 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'bestburger.wsgi.application'
+AUTHENTICATION_BACKENDS = [
+  
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+  
+]
+
+SITE_ID = 1 #allauth
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' #allows emails to be sent to the console. Change for a live project
+
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email' #allauth
+ACCOUNT_EMAIL_REQUIRED = True #allauth
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory' #allauth
+ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE = True #allauth
+ACCOUNT_USERNAME_MIN_LENGTH = 4 #allauth
+LOGIN_URL = '/accounts/login/' #allauth
+LOGIN_REDIRECT_URL = '/success' #allauth
+WSGI_APPLICATION = 'bestburger.wsgi.application' #allauth
 
 
 # Database
