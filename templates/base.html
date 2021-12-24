@@ -35,10 +35,7 @@
 
     <!-- below block for core js tags, i.e. bootstrap, jquery, fontawesome, own script -->
     {% block corejs %}
-    <!-- Stripe -->
-    <script src="https://js.stripe.com/v3/"></script>
-    <script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
-    <script src="" defer></script>
+    
     <!-- other stuff -->
     <script src="https://kit.fontawesome.com/72d81e3495.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
@@ -54,14 +51,15 @@
     <!-- below block for extra js if needed in the future -->
     {% block extra_js %}
 
-    <!-- the below needs to be in a html file in order for the js file to parse it. https://www.quora.com/How-does-one-access-Django-template-variables-in-JavaScript -->
-    <script type="text/javascript">
-		var user = '{{request.user}}'
-</script>
-<script>// the below is what gets the csrf token. I tried putting this inside  cart.js but it didn't work. 
-// Refer to https://docs.djangoproject.com/en/4.0/ref/csrf/ for info on how this works using javascript
+    <!-- the below needs to be in a html file in order for the js file to parse it. 
+        https://www.quora.com/How-does-one-access-Django-template-variables-in-JavaScript -->
 
-        function getToken(name) {
+    <!-- the below is messy, but the only way to not throw up csrf tokens while using js for the form post. 
+        Refer to this:https://docs.djangoproject.com/en/3.0/ref/csrf/#ajax -->
+    <script type="text/javascript">
+        var user = '{{request.user}}'
+
+         function getToken(name) {
             var cookieValue = null;
             if (document.cookie && document.cookie !== '') {
                 var cookies = document.cookie.split(';');
@@ -76,7 +74,8 @@
             }
             return cookieValue;
         }
-        var csrftoken = getToken('csrftoken')</script>
+        var csrftoken = getToken('csrftoken')
+    </script>
 
 
     {% endblock %}
@@ -90,7 +89,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark">
         <!-- place container inside navbar so navbar fills the page -->
         <div class="container-fluid">
-            
+
 
             <!-- navbar icon -->
             <a class="navbar-brand" href="{% url 'home' %}">
@@ -99,8 +98,9 @@
             </a>
 
             <!-- collapse button -->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarNavDropdown" aria-expanded="false"
+                aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 

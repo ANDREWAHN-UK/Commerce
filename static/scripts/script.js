@@ -25,11 +25,13 @@ var updateBtns = document.getElementsByClassName('update-cart')
 
 
 // this function gets called above
+// it fetches the function in the url
 // the post request turns the product id and action as a json Object, and string formats it
+
 function updateUserOrder(productId, action){
 	console.log('User is authenticated, sending data...')
 
-		var url = '/update_item/'
+		var url = 'update_item/'
 
 		fetch(url, {
 			method:'POST',
@@ -46,5 +48,3 @@ function updateUserOrder(productId, action){
 		    location.reload()
 		});
 }
-
-

@@ -1,6 +1,7 @@
 from django.urls import path
 from . import views
-
+import json
+from django.http import JsonResponse
 
 urlpatterns = [
     path('', views.store, name='store'),
