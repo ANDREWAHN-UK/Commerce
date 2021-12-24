@@ -15,4 +15,5 @@ def home(request):
         items = []	
         order = {'get_cart_total': 0, 'get_cart_items': 0}
 
-    context = {'items': items, 'order': order, 'cartItems': cartItems
+    context = {'items': items, 'order': order, 'cartItems': cartItems}
+    return render(request, 'home/home.html', context)
