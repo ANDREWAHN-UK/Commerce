@@ -53,6 +53,32 @@
 
     <!-- below block for extra js if needed in the future -->
     {% block extra_js %}
+
+    <!-- the below needs to be in a html file in order for the js file to parse it. https://www.quora.com/How-does-one-access-Django-template-variables-in-JavaScript -->
+    <script type="text/javascript">
+		var user = '{{request.user}}'
+</script>
+<script>// the below is what gets the csrf token. I tried putting this inside  cart.js but it didn't work. 
+// Refer to https://docs.djangoproject.com/en/4.0/ref/csrf/ for info on how this works using javascript
+
+        function getToken(name) {
+            var cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                var cookies = document.cookie.split(';');
+                for (var i = 0; i < cookies.length; i++) {
+                    var cookie = cookies[i].trim();
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        var csrftoken = getToken('csrftoken')</script>
+
+
     {% endblock %}
 
     <title>Best Burger</title>
