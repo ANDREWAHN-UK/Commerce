@@ -14,13 +14,14 @@
       <div class="card" style="width: 20rem; ">
 
         <!-- NB the below references the property decorator found in store/models.py, and NOT the static/images folder as is more conventional -->
-        <!-- the reason for this is to work around having a faulty image. 
-	Using direct linkage to the static/images was resulting in an app crash if there  was a missing/faulty image -->
+        <!-- the reason for this is to work around having a faulty image. -->
+	      <!-- Using direct linkage to the static/images was resulting in an app crash if there  was a missing/faulty image  -->
         <img src="{{product.imageURL}}" class="card-img-top thumbnail" alt="...">
         <div class="card-body">
           <h5 class="card-title">{{product.name}} </h5>
-
-          <button class="btn btn-outline-success">
+          
+          <!-- data product here lets js know which button was clicked -->
+          <button data-product="{{product.id}}" data-action="add" class="btn btn-outline-success update-cart">
             Add to Cart
           </button>
 
