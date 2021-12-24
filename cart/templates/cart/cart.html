@@ -20,7 +20,7 @@
 
 	<div class="cart transition is-open">
 
-		
+
 
 
 		<div class="table">
@@ -48,11 +48,13 @@
 				</div>
 
 				<div class="col col-qty layout-inline">
-					<a  data-action="remove" href="#" class="qty qty-minus chg-quantity update-cart">-</a>
+					<a data-product="{{item.product.id}}" data-action="remove" href="#"
+						class="qty qty-minus chg-quantity update-cart">-</a>
 					<input type="numeric" value={{item.quantity}} />
-					<a data-action="add" href="#" class="qty qty-plus chg-quantity update-cart">+</a>
-				</div>
-				
+					<a data-product="{{item.product.id}}" data-action="add" href="#"
+						class="qty qty-plus chg-quantity update-cart">+</a>
+				</div>				
+
 
 				<div class="col col-total col-numeric">
 					<p> £ {{item.get_total|floatformat:2}}</p>
@@ -62,10 +64,10 @@
 
 			<!-- this sits at the bottom and calculates the grand totals  -->
 			<div class="tf">
-				
+
 				<div class="row layout-inline">
 					<div class="col">
-						<p class ="cart-end">Total £ {{order.get_cart_total|floatformat:2}}</p>
+						<p class="cart-end">Total £ {{order.get_cart_total|floatformat:2}}</p>
 					</div>
 					<div class="col"></div>
 				</div>
