@@ -1,3 +1,3 @@
-// this js file targets things on cart.html
+// this js file targets things on store, cart
 
 
