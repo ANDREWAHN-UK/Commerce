@@ -261,19 +261,19 @@ a {
 }
 
 
-a.qty {
-  width: 1em;
-  line-height: 1em;
+.qty {
+  width: 1.5em;
+  line-height: 1.5em;
   border-radius: 2em;
   font-size: 2.5em;
   font-weight: bold;
   text-align: center;
-  background: #43ace3;  
-  color: #fff;
+  background: #c0e343;  
+  color: #43ace3;
 }
 
-a.qty:hover {
-  background: #3b9ac6;
+.qty:hover {
+  background: #c0e343;
 }
 
 .cart-btn {
