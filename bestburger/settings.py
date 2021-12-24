@@ -156,6 +156,12 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
 
+# the below makes it so the url picks up on the images
+MEDIA_URL = '/media/'
+
+# the below makes it so images added through the admin panel go to and are accessed from static/images
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static/media')
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
