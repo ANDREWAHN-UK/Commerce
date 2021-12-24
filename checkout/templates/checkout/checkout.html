@@ -91,10 +91,13 @@
 				</div>
 
 				<div class="col col-qty layout-inline">
-					<a  data-action="remove" href="#" class="qty qty-minus chg-quantity update-cart">-</a>
+					<p data-product="{{item.product.id}}" data-action="remove" 
+						class="qty qty-minus chg-quantity update-cart">-</p>
 					<input type="numeric" value={{item.quantity}} />
-					<a data-action="add" href="#" class="qty qty-plus chg-quantity update-cart">+</a>
-				</div>
+					<p data-product="{{item.product.id}}" data-action="add" 
+						class="qty qty-plus chg-quantity update-cart">+</p>
+				</div>				
+
 
 				<div class="col col-total col-numeric">
 					<p> £ {{item.get_total|floatformat:2}}</p>
