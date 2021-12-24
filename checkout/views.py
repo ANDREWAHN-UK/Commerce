@@ -1,6 +1,7 @@
 from django.shortcuts import render
-from store.models import *
+from checkout.models import Order
 from .models import *
+from store.views import *
 # Create your views here.
 
 def checkout(request):
@@ -12,7 +13,7 @@ def checkout(request):
         # Create empty cart for now for non-logged in user
         # this is because the template will loop through the whole list, so there needs to be something here
         items = []	
-        order = {'get_cart_total':0, 'get_cart_items':0}
+        order = {'get_cart_total': 0, 'get_cart_items': 0}
 
-    context = {'items':items, 'order':order}
+    context = {'items': items, 'order': order}
     return render(request, 'checkout/checkout.html', context)
