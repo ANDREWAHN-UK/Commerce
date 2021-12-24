@@ -2,13 +2,83 @@
 
 {% extends "base.html" %}
 {% load static %}
+
+{% block loadjs %}
+<script src="{% static 'scripts/cart.js' %}"></script>
+{% endblock %}
 {% block content %}
 
-<div class="container store">
+<div class="cart-container">
 
-	<div class="row">
-	<p>TEST for Cart</p>
+	<div class="cart-heading">
+		<h1 id="cart-h1">
+			<span class="shopper">s</span> Burger Cart
+		</h1>
+
+		<a href="#" class="visibility-cart transition is-open">X</a>
 	</div>
-</div>
 
-{% endblock %}
+	<div class="cart transition is-open">
+
+		<a href="#" class="cart-btn btn-update">Update cart</a>
+
+
+		<div class="table">
+			<!-- this is like a header for the table. If the order is adjusted here, adjust the next part to sync-->
+			<div class="layout-inline row th">
+				<div class="col col-pro">Product</div>
+				<div class="col col-price align-center ">
+					Price
+				</div>
+				<div class="col col-qty align-center">QTY</div>
+				<div class="col">VAT</div>
+				<div class="col">Total</div>
+			</div>
+
+			<!-- this is where the item information is displayed. It needs to follow the order laid out above -->
+			{% for item in items %}
+			<div class="layout-inline row">
+
+				<div class="col col-pro layout-inline">
+					<img class="thumbnail" src="{{item.product.imageURL}}" alt="delicious burger" />
+					<p>{{item.product.name}}</p>
+				</div>
+
+				<div class="col col-price col-numeric align-center ">
+					<p>£{{item.product.price|floatformat:2}}</p>
+				</div>
+
+				<div class="col col-qty layout-inline">
+					<a href="#" class="qty qty-minus">-</a>
+					<input type="numeric" value="3" />
+					<a href="#" class="qty qty-plus">+</a>
+				</div>
+
+				<div class="col col-total col-numeric">
+					<p> £ {{item.get_total|floatformat:2}}</p>
+				</div>
+			</div>
+			{% endfor %}
+
+			<!-- this sits at the bottom and calculates the grand totals  -->
+			<div class="tf">
+				
+				<div class="row layout-inline">
+					<div class="col">
+						<p class ="cart-end">Shipping</p>
+					</div>
+					<div class="col "></div>
+				</div>
+				<div class="row layout-inline">
+					<div class="col">
+						<p class ="cart-end">Total £ {{order.get_cart_total|floatformat:2}}</p>
+					</div>
+					<div class="col"></div>
+				</div>
+			</div>
+		</div>
+
+		<a href="#" class="cart-btn btn-update">Proceed to checkout</a>
+	</div>
+
+	{% endblock %}
