@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from checkout.models import Order
 from .models import *
-from store.views import *
+from store.views import updateItem
 # Create your views here.
 
 def checkout(request):

@@ -5,4 +5,5 @@ from . import views
 
 urlpatterns = [
     path('', views.checkout, name='checkout'),
+    path('update_item/', views.updateItem, name="update_item"),
 ]
