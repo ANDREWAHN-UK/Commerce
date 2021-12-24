@@ -145,6 +145,7 @@ a {
   box-shadow: 0 0.5em 0 rgba(138, 148, 152, 0.2);
 }
 
+/* this is the heading */
 .cart-heading {
   padding: 1em;
   position: relative;
@@ -180,6 +181,7 @@ a {
   text-align: center;
 }
 
+/* this acts like a header for the table */
 .th {
   background: #f34d35;
   color: #fff;
@@ -188,6 +190,7 @@ a {
   font-size: 1.5em;
 }
 
+/* this sits at the bottom */
 .tf {
   background: #f34d35;
   text-transform: uppercase;
@@ -301,6 +304,49 @@ a.qty:hover {
   transition: all 0.3s ease-in-out;
 }
 
+/* ====================================================={checkout page}===================================================== */
+
+/* the checkout page recycles the cart stuff, differentiated below for visual purposes */
+
+.checkout-btn {
+  padding: 10px 30px;
+  border-radius: 0.3em;
+  font-size: 1.4em;
+  font-weight: bold;
+  background: #159b3d;
+  color: #fff;
+  box-shadow: 0 3px 0 rgba(59,154,198, 1)
+}
+
+/* this acts like a header for the table */
+.th-checkout {
+  background: #74722a;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 1.5em;
+}
+
+/* this sits at the bottom */
+.tf-checkout {
+  background: #74722a;
+  text-transform: uppercase;
+  text-align: right;
+  font-size: 1.2em;  
+}
+
+.tf-checkout p {
+  color: #fff;
+  font-weight: bold;
+}
+/* this is the heading */
+.checkout-heading {
+  padding: 1em;
+  position: relative;
+  z-index: 1;
+  color: #f7f7f7;
+  background: #74722a;
+}
 /* ====================================================={media queries}===================================================== */
 @media screen and ( max-width: 755px) {
   .container {
