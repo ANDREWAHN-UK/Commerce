@@ -4,11 +4,117 @@
 {% load static %}
 {% block content %}
 
-<div class="container store">
+
+<div class="cart-container">
 
 	<div class="row">
-	<p>TEST for Checkout</p>
+		<div class="col-lg-6">
+			<div class="box-element" id="form-wrapper">
+
+				<form id="delivery-form">
+					<div id="user-info">
+						<div class="form-field">
+							<input required class="form-control" type="text" name="name" placeholder="Name..">
+						</div>
+						<div class="form-field">
+							<input required class="form-control" type="email" name="email" placeholder="Email..">
+						</div>
+					</div>
+
+					<div id="shipping-info">
+						<hr>
+						<p>Shipping Information:</p>
+						<hr>
+						<div class="form-field">
+							<input class="form-control" type="text" name="address" placeholder="Address..">
+						</div>
+						<div class="form-field">
+							<input class="form-control" type="text" name="city" placeholder="City..">
+						</div>
+
+					</div>
+					<div class="form-field">
+						<input class="form-control" type="text" name="county" placeholder="County..">
+					</div>
+					<div class="form-field">
+						<input class="form-control" type="text" name="postcode" placeholder="Postcode..">
+					</div>
+					<div class="form-field">
+						<input class="form-control" type="number" name="number" placeholder="Phone Number..">
+					</div>
+					
+				</form>
+				
+			</div>
+
+		</div>
+
+		<br>
+
 	</div>
-</div>
+
+	<div class="checkout-heading">
+		<h1 id="cart-h1">
+			<span class="shopper">s</span> Order summary
+		</h1>
+
+		<a href="#" class="visibility-cart transition is-open">X</a>
+	</div>
+
+	<div class="cart transition is-open">
+
+		<a href="{% url 'cart' %}" class="checkout-btn btn-update">Back to cart</a>
+
+
+		<div class="table">
+			<!-- this is like a header for the table. If the order is adjusted here, adjust the next part to sync-->
+			<div class="layout-inline row th-checkout">
+				<div class="col col-pro">Product</div>
+				<div class="col col-price align-center ">
+					Price
+				</div>
+				<div class="col col-qty align-center">QTY</div>
+				<div class="col">Total</div>
+			</div>
+
+			<!-- this is where the item information is displayed. It needs to follow the order laid out above -->
+			{% for item in items %}
+			<div class="layout-inline row">
+
+				<div class="col col-pro layout-inline">
+					<img class="thumbnail" src="{{item.product.imageURL}}" alt="delicious burger" />
+					<p>{{item.product.name}}</p>
+				</div>
+
+				<div class="col col-price col-numeric align-center ">
+					<p>£{{item.product.price|floatformat:2}}</p>
+				</div>
+
+				<div class="col col-qty layout-inline">
+					<a href="#" class="qty qty-minus">-</a>
+					<input type="numeric" value="3" />
+					<a href="#" class="qty qty-plus">+</a>
+				</div>
+
+				<div class="col col-total col-numeric">
+					<p> £ {{item.get_total|floatformat:2}}</p>
+				</div>
+			</div>
+			{% endfor %}
+
+			<!-- this sits at the bottom and calculates the grand totals  -->
+			<div class="tf-checkout">
+				
+				<div class="row layout-inline">
+					<div class="col">
+						<p class ="cart-end">Total £ {{order.get_cart_total|floatformat:2}}</p>
+					</div>
+					<div class="col"></div>
+				</div>
+			</div>
+		</div>
+
+		<a href="#" class="checkout-btn btn-update">Proceed to Payment</a>
+	</div>
 
 {% endblock %}
