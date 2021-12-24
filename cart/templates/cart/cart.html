@@ -31,7 +31,6 @@
 					Price
 				</div>
 				<div class="col col-qty align-center">QTY</div>
-				<div class="col">VAT</div>
 				<div class="col">Total</div>
 			</div>
 
@@ -63,12 +62,6 @@
 			<!-- this sits at the bottom and calculates the grand totals  -->
 			<div class="tf">
 				
-				<div class="row layout-inline">
-					<div class="col">
-						<p class ="cart-end">Shipping</p>
-					</div>
-					<div class="col "></div>
-				</div>
 				<div class="row layout-inline">
 					<div class="col">
 						<p class ="cart-end">Total £ {{order.get_cart_total|floatformat:2}}</p>
