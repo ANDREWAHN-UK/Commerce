@@ -5,7 +5,7 @@ from .models import Product, Customer
 
 class ProductAdmin(admin.ModelAdmin):
     list_display = (
-        'name',        
+        'name',
         'price',
         'image',
     )
