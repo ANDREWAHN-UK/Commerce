@@ -23,7 +23,7 @@ def checkout(request):
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY
 
-    stripe.PaymentIntent.create(
+    intent = stripe.PaymentIntent.create(
         customer='{{customer}}',
         currency="usd",
         amount=2000,
@@ -31,5 +31,12 @@ def checkout(request):
         setup_future_usage="on_session",
         )
 
-    context = {'items': items, 'order': order, 'cartItems': cartItems}
+    context = {
+        'items': items, 
+        'order': order, 
+        'cartItems': cartItems,
+        'stripe_public_key':stripe_public_key,
+        'client_secret': intent.client_secret,
+         }
     return render(request, 'checkout/checkout.html', context)
+
