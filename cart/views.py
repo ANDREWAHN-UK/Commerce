@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, reverse
-from store.models import  Product
+from store.models import Product
 from checkout.models import Order
 from store.views import updateItem
 
