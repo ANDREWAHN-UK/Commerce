@@ -42,9 +42,9 @@
 					<div class="form-field">
 						<input class="form-control" type="number" name="number" placeholder="Phone Number..">
 					</div>
-					
+
 				</form>
-				
+
 			</div>
 
 		</div>
@@ -91,12 +91,12 @@
 				</div>
 
 				<div class="col col-qty layout-inline">
-					<p data-product="{{item.product.id}}" data-action="remove" 
+					<p data-product="{{item.product.id}}" data-action="remove"
 						class="qty qty-minus chg-quantity update-cart">-</p>
 					<input type="numeric" value={{item.quantity}} />
-					<p data-product="{{item.product.id}}" data-action="add" 
+					<p data-product="{{item.product.id}}" data-action="add"
 						class="qty qty-plus chg-quantity update-cart">+</p>
-				</div>				
+				</div>
 
 
 				<div class="col col-total col-numeric">
@@ -107,20 +107,41 @@
 
 			<!-- this sits at the bottom and calculates the grand totals  -->
 			<div class="tf-checkout">
-				
+
 				<div class="row layout-inline">
 					<div class="col">
-						<p class ="cart-end">Total £ {{order.get_cart_total|floatformat:2}}</p>
+						<p class="cart-end">Total £ {{order.get_cart_total|floatformat:2}}</p>
 					</div>
 					<div class="col"></div>
 				</div>
 			</div>
 		</div>
 
-		<form action="/create-checkout-session" method="POST">
-			<button type="submit" id="checkout-button" class="checkout-btn btn-update">Checkout</button>
-		  </form>
-		<a href="#" class="checkout-btn btn-update">Proceed to Payment</a>
+		<form action="" method="POST"  id="payment-form">{% csrf_token %}
+
+			<div id="payment-element">
+				<!--Stripe.js injects the Payment Element-->
+			</div>
+
+			<button type="submit" id="pay-now-button" class="checkout-btn btn-update">
+				Pay now
+			</button>
+
+			<p> <span class="icon">
+					<i class="fas fa-exclamation-circle"></i>
+				</span>
+				<span>
+					Your card will be charged <strong>£{{ order.get_cart_total|floatformat:2 }}</strong>
+				</span>
+			</p>
+		</form>
 	</div>
 
-{% endblock %}
+	{% block postloadjs %}
+	{{ block.super }}
+	{{ stripe_public_key|json_script:"id_stripe_public_key" }}
+	{{ client_secret|json_script:"id_client_secret" }}
+	<script src="{% static 'scripts/stripe_elements.js' %}"></script>
+	{% endblock %}
+
+	{% endblock %}
