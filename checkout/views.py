@@ -1,7 +1,10 @@
 from django.shortcuts import render
 from .models import Order, OrderItem, ShippingAddress
+from .forms import OrderForm
+from store.models import Product
 from store.views import updateItem
 import stripe
+
 from bestburger import settings
 import datetime
 import json
@@ -10,9 +13,15 @@ from django.http import JsonResponse
 # Create your views here.
 
 def checkout(request):
+   # public key needs to be displayed here so stripe_elements can access it
+    stripe_public_key = 'pk_test_51K8jexEE3VLVHzWc8ckIVJpmSWAhlhOnT7nz8ioOry3z0atx9lyoXk3K2njUw23ZsTs21nofTig1QnoY31ni4H0s00njCJPUBc'
+    stripe_secret_key = settings.STRIPE_SECRET_KEY 
+    stripe.api_key = 'sk_test_51K8jexEE3VLVHzWcHSDIRoXnm3cGSze1zo4WDrHeSMwLQjO269ds452ALbYGlliIeTcdqzW7qEc82cOtrKUILdq100uvmXF6cq'
+
     if request.user.is_authenticated:
         customer = request.user.customer
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        product = Product
         items = order.orderitem_set.all()
         cartItems = order.get_cart_items
     else:
@@ -21,13 +30,32 @@ def checkout(request):
         #  so there needs to be something here
         items = []
         order = {'get_cart_total': 0, 'get_cart_items': 0}
-        cartItems = order['get_cart_items']
+        cartItems = order['get_cart_items']   
 
-    stripe.api_key = 'sk_test_51K8jexEE3VLVHzWcHSDIRoXnm3cGSze1zo4WDrHeSMwLQjO269ds452ALbYGlliIeTcdqzW7qEc82cOtrKUILdq100uvmXF6cq'
+    if request.method == 'POST':
+        cart = request.session.get('cart', {})
 
-    # public key needs to be displayed here so stripe_elements can access it
-    stripe_public_key = 'pk_test_51K8jexEE3VLVHzWc8ckIVJpmSWAhlhOnT7nz8ioOry3z0atx9lyoXk3K2njUw23ZsTs21nofTig1QnoY31ni4H0s00njCJPUBc'
-    stripe_secret_key = settings.STRIPE_SECRET_KEY
+        form_data = {
+            'name': request.POST['name'],
+            'email': request.POST['email'],
+            'address': request.POST['address'],
+            'street': request.POST['street'],            
+            'city': request.POST['city'],
+            'county': request.POST['county'],
+            'postcode': request.POST['postcode'],
+            'street_address2': request.POST['street_address2'],
+            'number': request.POST['number'],
+            }
+        
+        order_form = OrderForm(form_data)
+        if order_form.is_valid():
+            order = order_form.save(commit=False)
+            order.save()
+        
+        for item.name
+        
+        
+    
     # the'amount' variable  is also displayed in the cart and checkout apps
     # it needs to be a number like 1234 instead of 12.34, for stripe reasons
     amount = round(order.get_cart_total*100)

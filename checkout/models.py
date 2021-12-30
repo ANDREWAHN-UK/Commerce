@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from store.models import Customer, Product
 from django.conf import settings
 import decimal
+import uuid
 # Create your models here.
 
 
@@ -20,15 +21,30 @@ class Order(models.Model):
         (SUBMITTED, 'Submitted'),
         (PROCESSED, 'Processed'),
         (SHIPPED, 'Shipped'),
-        (CANCELLED,'Cancelled'),
+        (CANCELLED, 'Cancelled'),
     )
 
     status = models.IntegerField(choices=ORDER_STATUSES, default=SUBMITTED)
+    order_number = models.CharField(max_length=32, null=False, editable=False, default='111')
+
+    name = models.CharField(max_length=50, null=False, blank=False, default='name')
+    email = models.EmailField(max_length=254, null=False, blank=False, default='email')
+    address = models.CharField(max_length=80, null=False, blank=False, default='address')
+    street = models.CharField(max_length=80, null=False, blank=False, default='street')
+    city = models.CharField(max_length=80, null=False, blank=False, default='city')
+    county = models.CharField(max_length=80, null=False, blank=True, default='county')
+    postcode = models.CharField(max_length=20, null=True, blank=False, default='postcode')
+    number = models.CharField(max_length=20, null=False, blank=False, default='number')
+
     customer = models.ForeignKey(
         Customer, on_delete=models.SET_NULL, null=True, blank=True)
     date_ordered = models.DateTimeField(auto_now_add=True)
     complete = models.BooleanField(default=False)
     transaction_id = models.CharField(max_length=100, null=True)
+
+    def _generate_order_number(self):
+        # UUID to generate a random number    
+        return uuid.uuid4().hex.upper()
 
     def __str__(self):
         return str(self.id)
@@ -64,7 +80,7 @@ class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
     quantity = models.IntegerField(default=0, null=True, blank=True)
     date_added = models.DateTimeField(auto_now_add=True)
-    
+
     @property
     def get_total(self):
         total = self.product.price * self.quantity
