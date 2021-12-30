@@ -1,6 +1,8 @@
 from django.db import models
 #  this is so a 1-to-1 user model can be built, i.e. each user=customer
 from django.contrib.auth.models import User  
+from django_extensions.db.fields import AutoSlugField
+import uuid
 
 # Create your models here.
 
@@ -29,8 +31,6 @@ class Product(models.Model):
 	price = models.DecimalField(max_digits=6, decimal_places=2)
 	image = models.ImageField(null=True, blank=True)
 	description = models.TextField(default='')
-	slug = models.SlugField(max_length=50, unique=True, help_text='url created from this product name')
-
 	def __str__(self):
 		return self.name
 
