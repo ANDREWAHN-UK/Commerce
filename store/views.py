@@ -4,6 +4,7 @@ from store.models import Product
 from checkout.models import Order, OrderItem
 from django.http import JsonResponse
 import json
+from cart.views import *
 
 
 

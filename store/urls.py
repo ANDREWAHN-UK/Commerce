@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from cart.views import *
 import json
 from django.http import JsonResponse
 

@@ -74,4 +74,129 @@
 		<a href="{% url 'checkout' %}" class="cart-btn btn-update">Proceed to checkout</a>
 	</div>
 
+<!-- 
+	<div class="overlay"></div>
+<div class="container bg-white">
+
+    <div class="row">
+        <div class="col">
+            <h2 class="text-center bg-white p-2 font-weight-bold text-black"> Shopping cart</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            {% if cart_items %}
+            <div class="table-responsive rounded">
+                <table class="table table table-sm bg-white">
+                    <thead>
+                      <tr>
+                        <th></th>
+                        <th scope="col" class="text-center">Image</th>
+                        <th scope="col" class="text-center">Product Info</th>
+                        <th scope="col" class="text-center">Quantity</th>
+                        <th scope="col" class="text-center">Total</th>
+                      </tr>
+                    </thead>
+                    <div>
+                    {% for item in cart_items %}
+                    <tr>
+                        <th></th>
+                        <td class="p-ml-3 w-25"><img class="img-fluid rounded" src="{{ item.product.image.url }}"></td>
+                        <td class="p-ml-3 w-25">
+                            <p class="my-0"><strong>{{item.product.name}}</strong></p>
+                            <p class="my-0">€{{ item.product.price }}</p>
+                        </td>
+                        <td class="p-ml-3 w-25">
+                            <form class="form update-form" action="{% url 'update_cart' item.item_id %}" method="POST">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend col-12 col-md-5 col-lg-4 col-xl-3">
+                                            <button class="decrement-qty btn-sm btn btn-black rounded-0" 
+                                                data-item_id="{{ item.item_id }}" id="decrement-qty_{{ item.item_id }}">
+                                                <span>
+                                                    <i class="fas fa-minus fa-sm"></i>
+                                                </span>
+                                            </button>
+                                        </div>
+                                        <input class="form-control qty_input col-xl-3 col-lg-4 col-md-10 col-sm-9 col-10" type="number"
+                                            name="quantity" value="{{ item.quantity }}" min="1" max="99"
+                                            data-item_id="{{ item.item_id }}"
+                                            id="id_qty_{{ item.item_id }}">
+                                        <div class="input-group-append col-12 col-md-2">
+                                            <button class="increment-qty btn btn-sm btn-black rounded-0"
+                                                data-item_id="{{ item.item_id }}" id="increment-qty_{{ item.item_id }}">
+                                                <span>
+                                                    <i class="fas fa-plus fa-sm"></i>
+                                                </span>
+                                            </button>
+                                            {% if item.variation %}
+                                            <input type="hidden" name="variation" value="{{ item.variation.name|lower }}">
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            <a class="update-link text-info p-1"><small>Update</small></a>
+                            <a class="remove-item text-danger p-1" id="remove_{{ item.item_id }}" data-variation="{{ item.variation }}"><small>Remove</small></a>
+                        </td> 
+                        <td class="p-ml-3 w-25"> <p class="text-center">€{{ item.product.price }}</p></td>
+                    </tr> 
+                
+                    {% endfor %}
+                    <tr>
+                        <td colspan="5" class="pt-3 text-right">
+                            <h6><strong>cart Total: €{{ total|floatformat:2 }}</strong></h6>
+                            <h6><strong>Delivery:</strong></h6>
+                                <p>
+                                    {% if free_delivery_delta > 0 %}
+                                        €{{ delivery_charge|floatformat:2 }}
+                                    {% else %}
+                                        FREE
+                                    {% endif %}
+                                </p>
+                            </div>
+
+                        </td>
+                    </tr>   
+                    <tr>
+                        <td colspan="5" class="pt-5 pb-2 text-right">
+                            <h6><strong>Grand Total: €{{ grand_total|floatformat:2 }}</strong></h6>
+                            {% if free_delivery_delta > 0 %}
+                            <p class="mb-1 text-info"><i class="fas fa-ghost"></i>
+                                Free delivery if you spend <strong>€{{ free_delivery_delta }}</strong> more!
+                            </p>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="5" class="text-right">
+                            <a href="{% url 'products' %}" class="btn btn-outline-black rounded-0 btn-lg">
+                                <span class="icon">
+                                    <i class="fas fa-chevron-left"></i>
+                                </span>
+                                <span class="text-uppercase">Keep Shopping</span>
+                            </a>
+                            <a href="{% url 'checkout' %}" class="btn btn-black rounded-0 btn-lg">
+                                <span class="text-uppercase">Secure Checkout</span>
+                                <span class="icon">
+                                    <i class="fas fa-lock"></i>
+                                </span>
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            {% else %}
+            <p> No items in your cart yet</p>
+            <a href="{% url 'store' %}" class="btn btn-outline-black rounded-0 mt-5">
+                <span class="icon">
+                    <i class="fas fa-chevron-left">Start Shopping</i>
+                </span>
+            </a>
+            {% endif %}
+        </div>
+    </div> -->
+
+</div>
 	{% endblock %}

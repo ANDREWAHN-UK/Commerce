@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, reverse, HttpResponse, redirect
 from .models import Order, OrderItem, ShippingAddress
 from .forms import OrderForm
+
 from store.models import Product
 from store.views import updateItem
 import stripe
@@ -8,7 +9,9 @@ import stripe
 from bestburger import settings
 import datetime
 import json
+
 from django.http import JsonResponse
+from django.contrib import messages
 
 # Create your views here.
 
@@ -50,9 +53,23 @@ def checkout(request):
         order_form = OrderForm(form_data)
         if order_form.is_valid():
             order = order_form.save(commit=False)
-            order.save()
-        
-        for item.name
+            for item_id, item_data in cart.items():
+                try:
+                    product = Product.objects.get(id=item_id)
+                    order_line_item = OrderItem(
+                        order=order,
+                        product=product,
+                        quantity=item_data,
+                    )
+                    order_line_item.save()
+                except Product.DoesNotExist:
+                    messages.error(request, (
+                        "One of the products in your cart wasn't\
+                        found in our database.\
+                        Please call us for assistance!")
+                    )
+                    order.delete()
+                    return redirect(reverse('view_cart'))
         
         
     
