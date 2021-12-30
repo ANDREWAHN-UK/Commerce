@@ -43,10 +43,10 @@ INSTALLED_APPS = [
     'cart',
     'checkout',
     'home',
-    'django.contrib.sites',  #allauth
-    'allauth',  #allauth
-    'allauth.account',  #allauth
-    'allauth.socialaccount',  #allauth
+    'django.contrib.sites',  # allauth
+    'allauth',  # allauth
+    'allauth.account',  # allauth
+    'allauth.socialaccount',  # allauth
     
 ]
 
