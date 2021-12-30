@@ -9,7 +9,9 @@ from django.contrib.auth.models import User
 # this is what was referred to with the import user. 
 # CASCADE here  means that if this is deleted, the associated stuff is also deleted
 class Customer(models.Model):
-	user = models.OneToOneField(User, null=True, blank=True, on_delete=models.CASCADE)    
+	user = models.OneToOneField(
+		User, null=True, blank=True, on_delete=models.CASCADE
+		)    
 	name = models.CharField(max_length=200, null=True)
 	email = models.CharField(max_length=200)
 	image = models.ImageField(null=True, blank=True)
