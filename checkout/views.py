@@ -104,6 +104,19 @@ def processOrder(request):
         order.transaction_id = transaction_id
     else:
         print('User is not logged in')
+    if total == order.get_cart_total:
+        order.complete = True
+        order.save()
+    
+    if order.shipping == True:
+         ShippingAddress.objects.create(
+            customer=customer,
+            order=order,
+            address=data['shipping']['address'],
+            city=data['shipping']['city'],
+            county=data['shipping']['county'],
+            postcode=data['shipping']['postcode'],
+            )
     return JsonResponse('Payment submitted...', safe=False)
     
 
