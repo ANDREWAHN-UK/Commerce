@@ -7,7 +7,7 @@
 
 <div class="cart-container">
 
-	
+
 
 	<div class="checkout-heading">
 		<h1 id="cart-h1">
@@ -73,7 +73,7 @@
 			</div>
 		</div>
 
-		<form action="" method="POST"  id="payment-form">{% csrf_token %}
+		<form action="" method="POST" id="payment-form">{% csrf_token %}
 
 			<div id="user-info">
 				<div class="form-field">
@@ -129,6 +129,59 @@
 
 	<script>
 		var total = '{{order.get_cart_total|floatformat:2}}'
+
+		var form = document.getElementById('payment-form');
+
+		// when submit is triggered, by clicking the pay-now-button, submitFormData() is called
+		form.addEventListener('submit', function (e) {
+			e.preventDefault()
+			console.log('Form Submitted...', total);
+			submitFormData()
+		})
+
+		function submitFormData() {
+			console.log('Payment button clicked')
+
+			// gets user data
+			var userFormData = {
+				'name': form.name.value,
+				'email': form.email.value,
+				'total': total,
+			}
+
+			// gets user shipping address from the form
+			var shippingInfo = {
+				'address': form.address.value,
+				'street': form.street.value,
+				'city': form.city.value,
+				'county': form.county.value,
+				'postcode': form.postcode.value,
+			}
+
+
+			console.log('Shipping Info:', shippingInfo)
+			console.log('User Info:', userFormData)
+			alert('User Info:')
+
+
+			var url = "process_order/"
+	    	fetch(url, {
+	    		method:'POST',
+	    		headers:{
+	    			'Content-Type':'application/json',
+	    			'X-CSRFToken':csrftoken,
+	    		}, 
+	    		body:JSON.stringify({'form':userFormData, 'shipping':shippingInfo}),
+	    		
+	    	})
+	    	.then((response) => response.json())
+	    	.then((data) => {
+				  console.log('Success:', data);
+				  alert('Transaction completed');  
+				  window.location.href = "{% url 'store' %}"
+
+				})
+	    }
 	</script>
 
 	{% block postloadjs %}

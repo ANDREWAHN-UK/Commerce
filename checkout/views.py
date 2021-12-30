@@ -1,6 +1,5 @@
 from django.shortcuts import render
-from checkout.models import Order
-from .models import *
+from .models import Order, OrderItem, ShippingAddress
 from store.views import updateItem
 import stripe
 from bestburger import settings
@@ -53,7 +52,7 @@ def checkout(request):
 # below to process order once may payment button is clicked
 # date time generates order id
 def processOrder(request):
-	
+    
     transaction_id = datetime.datetime.now().timestamp()
     # below used to parse a valid JSON string
     # and convert it into a Python Dictionary, so the views can read it
@@ -62,10 +61,10 @@ def processOrder(request):
     if request.user.is_authenticated:
         customer = request.user.customer
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
-    else:
-        customer, order = guestOrder(request, data)
         total = float(data['form']['total'])
         order.transaction_id = transaction_id
+    else:
+        print('User is not logged in')
         # make sure the total received matches the cart total, and if so, save the order
     if total == order.get_cart_total:
         order.complete = True
@@ -81,5 +80,51 @@ def processOrder(request):
             county=data['shipping']['county'],
             postcode=data['shipping']['postcode'],
             )
-    
+
+
     return JsonResponse('Payment submitted...', safe=False)
+
+
+def process(request):
+    transaction_id = datetime.datetime.now().timestamp()
+    data = json.loads(request.body)
+     
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        total = float(data['form']['total'])
+        order.transaction_id = transaction_id
+    else:
+        print('User is not logged in')
+        # make sure the total received matches the cart total, and if so,
+        #  create an instance of the order
+    if total == order.get_cart_total:
+        order = create_order(request, transaction_id)
+        results = {'order_number': transaction_id, 'message': ''}
+     
+    return results
+
+
+def create_order(request, transaction_id):
+    order = Order()
+    transaction_id = datetime.datetime.now().timestamp()
+    order.transaction_id = transaction_id
+    order.user = None
+    order.status = order.SUBMITTED
+    order.save()
+    if order.pk:
+        cart_items = OrderItem
+        for ci in cart_items:
+            oi = OrderItem()
+            oi.order = order
+            oi.quantity = ci.quantity
+            oi.price = ci.price
+            oi.product = ci.product
+            oi.save()
+        cart.empty_cart(request)
+    
+    return order
+
+def empty_cart(request):
+    user_cart = get_cart_items(request)
+    user_cart.delete()

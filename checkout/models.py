@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from store.models import Customer, Product
 from django.conf import settings
-
+import decimal
 # Create your models here.
 
 
@@ -11,6 +11,19 @@ from django.conf import settings
 # There can be only one of these per customer, i.e the same order is not shared between customers
 
 class Order(models.Model):
+    SUBMITTED = 1
+    PROCESSED = 2
+    SHIPPED = 3
+    CANCELLED = 4
+
+    ORDER_STATUSES = (
+        (SUBMITTED, 'Submitted'),
+        (PROCESSED, 'Processed'),
+        (SHIPPED, 'Shipped'),
+        (CANCELLED,'Cancelled'),
+    )
+
+    status = models.IntegerField(choices=ORDER_STATUSES, default=SUBMITTED)
     customer = models.ForeignKey(
         Customer, on_delete=models.SET_NULL, null=True, blank=True)
     date_ordered = models.DateTimeField(auto_now_add=True)
@@ -58,7 +71,7 @@ class OrderItem(models.Model):
         return total
 
 # this tells us where to send the burger.
-# this will get connected/linked to a customer, so they don't have to fill it in again
+# this will get linked to a customer, so they don't have to fill it in again
 # in the profile, this will be editable (CRUD!)
 
 
