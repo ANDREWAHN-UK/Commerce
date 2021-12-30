@@ -29,6 +29,7 @@ class Product(models.Model):
 	price = models.DecimalField(max_digits=6, decimal_places=2)
 	image = models.ImageField(null=True, blank=True)
 	description = models.TextField(default='')
+	slug = models.SlugField(max_length=50, unique=True, help_text='url created from this product name')
 
 	def __str__(self):
 		return self.name
