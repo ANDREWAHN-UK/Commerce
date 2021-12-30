@@ -1,14 +1,18 @@
-from django.shortcuts import render, get_object_or_404, reverse
+from django.shortcuts import (
+    render, get_object_or_404, reverse, render_to_response
+)
+from django.template import RequestContext
 from store.models import Product
 from checkout.models import Order
 from store.views import updateItem
+from . import cart #refers to cart.py
 
 # Create your views here.
 
 
 # see documentation on get or create https://docs.djangoproject.com/en/4.0/ref/models/querysets/#get-or-create
 
-def cart(request):
+def show_cart(request):
 
     if request.user.is_authenticated:
         customer = request.user.customer
@@ -26,3 +30,12 @@ def cart(request):
     context = {'items': items, 'order': order, 'cartItems': cartItems}
     return render(request, 'cart/cart.html', context)
 
+
+
+def show_cart(request, template_name='cart/cart.html'):
+    cart_item_count = cart.cart_item_count(request)
+    page_title = 'Shopping Cart'
+    return render_to_response(
+        template_name, locals(),
+        context_instance=RequestContext(request)
+        )
